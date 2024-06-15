@@ -1,13 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simple Note Taker</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        textarea {
+            width: 100%;
+            height: 100vh;
+            resize: none;
+            border: none;
+            padding: 20px;
+            font-size: 16px;
+        }
+    </style>
 </head>
+
 <body>
     <textarea id="note" placeholder="Write your note here..."></textarea>
-    <script src="script.js"></script>
+    <script>
+        const noteTextarea = document.getElementById('note');
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedNote = localStorage.getItem('note');
+            if (savedNote) {
+                noteTextarea.value = savedNote;
+            }
+        });
+
+        noteTextarea.addEventListener('input', () => {
+            const note = noteTextarea.value;
+            localStorage.setItem('note', note);
+        });
+    </script>
 </body>
+
 </html>
